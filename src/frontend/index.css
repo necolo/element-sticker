@@ -11,4 +11,8 @@
     margin-right: 4px;
     margin-top: 8px;
     width: 100%;
+    cursor: pointer;
+}
+.sticker-list img:hover {
+    background-color: #eee;
 }
