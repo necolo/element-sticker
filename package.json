@@ -1,0 +1,23 @@
+{
+  "name": "element-sticker",
+  "version": "1.0.0",
+  "description": "A custom sticker for element.io apps",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Necolo/element-sticker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Necolo/element-sticker/issues"
+  },
+  "homepage": "https://github.com/Necolo/element-sticker#readme",
+  "dependencies": {
+    "node-static": "^0.7.11"
+  }
+}
