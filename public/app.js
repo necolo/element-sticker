@@ -3,11 +3,13 @@ import { useEffect, useState } from 'preact/hooks';
 import { StickerPack } from './components/sticker-pack';
 import { Tabs } from './components/tab';
 import { PanelBlock, AddStickerPack, ThemeSelector } from './components/panel-block';
+import { UploadSticker } from './components/upload-sticker';
 import { api } from './utils.mjs';
 
 function App () {
     const [packs, setPack] = useState([]);
     const [size, setSize] = useState(+(localStorage.getItem('size') || 64));
+    const [uploadStickerOnPack, setUploadStickerOnPack] = useState('');
     // const [onTheme, setTheme] = useState(localStorage.getItem('theme') || 'light-green');
 
     useEffect(() => {
@@ -15,10 +17,6 @@ function App () {
             setPack(res);
         }).catch(console.error);
     }, []);
-
-    if (!packs.length) {
-        return <h1>Loading...</h1>;
-    }
 
     return <div style={{position: 'relative'}}>
         <Tabs
@@ -29,8 +27,19 @@ function App () {
                 key={pack.name}
                 pack={pack}
                 size={size}
+                setUploadStickerOnPack={setUploadStickerOnPack}
             />
         })}
+
+        {uploadStickerOnPack && <UploadSticker
+            packName={uploadStickerOnPack}
+            onClose={(data) => {
+                if (data) {
+                    setPack(data);
+                }
+                setUploadStickerOnPack('');
+            }}
+        />}
 
         <article className="panel is-info">
             <p className="panel-heading" style={{
@@ -43,7 +52,7 @@ function App () {
                     min={16}
                     max={128}
                     step={4}
-                    onChange={(ev) => {
+                    onInput={(ev) => {
                         const v = +ev.target.value;
                         setSize(v);
                         localStorage.setItem('size', v);
@@ -52,12 +61,14 @@ function App () {
             </PanelBlock>
             <AddStickerPack
                 onAdd={(name) => {
-                    setPack((oldPacks) => oldPacks.concat({
-                        name,
-                        stickers: [],
-                    }));
+                    api('createPack', {name}).then((res) => {
+                        setPack(res);
+                    }).catch(console.error);
                 }}
                 onDelete={(name) => {
+                    api('deletePack', {name}).then((res) => {
+                        setPack(res);
+                    }).catch(console.error);
                 }}
             />
             <ThemeSelector

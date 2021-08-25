@@ -1,17 +1,17 @@
 import { useState } from 'preact/hooks';
 import { makeThumbnailURL } from '../utils.mjs';
+import { sendSticker } from '../message.mjs';
 
 export const StickerPack = ({
     pack,
     size,
+    setUploadStickerOnPack,
 }) => {
     const [isFold, toggleFold] = useState(false); 
+
     const handleFold = () => {
         toggleFold(!isFold);
     };
-    const handleAddSticker = () => {
-
-    }
 
     const { stickers, name } = pack;
     const style = {
@@ -41,9 +41,14 @@ export const StickerPack = ({
                     width={sticker.w}
                     height={sticker.h}
                     src={makeThumbnailURL(sticker.url)}
+                    onClick={() => {
+                        sendSticker(sticker);
+                    }}
                 />
             })}
-            <button onClick={handleAddSticker} style={style}>+</button>
+            <button onClick={() => {
+                setUploadStickerOnPack(name);
+            }} style={style}>+</button>
         </div>
         }
     </article>;

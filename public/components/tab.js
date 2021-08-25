@@ -5,7 +5,7 @@ export function Tabs ({
 }) {
     const [onName, setOnName] = useState(names[0]);
 
-    return <div className="tabs is-centered my-box-shadow" style={{
+    return <div className="tabs my-box-shadow" style={{
         position: 'sticky',
         top: '0',
         backgroundColor: 'white',
@@ -17,7 +17,7 @@ export function Tabs ({
                     key={name}
                     className={isActive ? 'is-active' : ''}
                     onClick={() => {
-                        setOnName(onName);
+                        setOnName(name);
                     }}
                 ><a href={`#${name}`}>{name}</a></li>
             })}
