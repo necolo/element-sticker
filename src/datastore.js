@@ -75,18 +75,22 @@ exports.putSticker = async ({ packName, stickerName, data }) => {
   return packs;
 };
 
-exports.swapPack = async ({ a, b }) => {
+exports.swapPack = async ({ items }) => {
   const data = await read();
-  swapArray(data, a, b);
+  for (let i = 0; i < items.length; i += 2) {
+    swapArray(data, items[i], items[i + 1]);
+  }
   await write(data);
   return data;
 };
 
-exports.swapSticker = async ({ name, a, b }) => {
+exports.swapSticker = async ({ name, items }) => {
   const data = await read();
   const idx = findItem(data, name);
   if (idx !== -1) {
-    swapArray(data[idx].stickers, a, b);
+    for (let i = 0; i < items.length; i += 2) {
+      swapArray(data[idx].stickers, items[i], items[i + 1]);
+    }
     await write(data);
   }
   return data;
