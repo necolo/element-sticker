@@ -5,7 +5,11 @@ export function Tabs ({
 }) {
     const [onName, setOnName] = useState(names[0]);
 
-    return <div className="tabs is-centered">
+    return <div className="tabs is-centered my-box-shadow" style={{
+        position: 'sticky',
+        top: '0',
+        backgroundColor: 'white',
+    }}>
         <ul>
             {names.map((name) => {
                 const isActive = onName === name;
@@ -15,7 +19,7 @@ export function Tabs ({
                     onClick={() => {
                         setOnName(onName);
                     }}
-                ><a>{name}</a></li>
+                ><a href={`#${name}`}>{name}</a></li>
             })}
         </ul>
     </div>;

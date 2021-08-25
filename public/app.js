@@ -2,105 +2,25 @@ import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { StickerPack } from './components/sticker-pack';
 import { Tabs } from './components/tab';
-import { ThemeSelector } from './components/theme';
+import { PanelBlock, AddStickerPack, ThemeSelector } from './components/panel-block';
 import { api } from './utils.mjs';
-
-const testData = [
-    {
-      name: '兔子',
-      stickers: [
-        {
-          "body": "Carrot",
-          "info": {
-            "h": 200,
-            "mimetype": "image/png",
-            "size": 80625,
-            "thumbnail_info": {
-              "h": 200,
-              "mimetype": "image/png",
-              "size": 80625,
-              "w": 142
-            },
-            "thumbnail_url": "mxc://matrix.org/kGJDCjMOgpLmZzbgknMTUHNm",
-            "w": 142
-          },
-          "msgtype": "m.sticker",
-          "url": "mxc://matrix.org/kGJDCjMOgpLmZzbgknMTUHNm",
-          "id": "kGJDCjMOgpLmZzbgknMTUHNm"
-        },
-        {
-          "body": "Chef",
-          "info": {
-            "h": 200,
-            "mimetype": "image/png",
-            "size": 88633,
-            "thumbnail_info": {
-              "h": 200,
-              "mimetype": "image/png",
-              "size": 88633,
-              "w": 151
-            },
-            "thumbnail_url": "mxc://matrix.org/szaTExsJurtDBUUEeHHbhyqk",
-            "w": 151
-          },
-          "msgtype": "m.sticker",
-          "url": "mxc://matrix.org/szaTExsJurtDBUUEeHHbhyqk",
-          "id": "szaTExsJurtDBUUEeHHbhyqk"
-        },
-      ],
-    },
-    {
-      name: '猫',
-      stickers: [
-        {
-          "body": "🎓",
-          "url": "mxc://maunium.net/pxbCqPJNvcFIZlAyKCyXsqfJ",
-          "info": {
-          "w": 256,
-          "h": 256,
-          "size": 106237,
-          "mimetype": "image/png",
-          "thumbnail_url": "mxc://maunium.net/pxbCqPJNvcFIZlAyKCyXsqfJ",
-          "thumbnail_info": {
-          "w": 256,
-          "h": 256,
-          "size": 106237,
-          "mimetype": "image/png"
-          }
-          },
-          "net.maunium.telegram.sticker": {
-          "pack": {
-          "id": "551004416715522051",
-          "short_name": "pusheen02"
-          },
-          "id": "551004416715522189",
-          "emoticons": [
-          "🎓"
-          ]
-          },
-          "id": "tg-551004416715522189"
-          },
-      ],
-    },
-  ];
 
 function App () {
     const [packs, setPack] = useState([]);
     const [size, setSize] = useState(+(localStorage.getItem('size') || 64));
-    const [onTheme, setTheme] = useState(localStorage.getItem('theme') || 'light-green');
+    // const [onTheme, setTheme] = useState(localStorage.getItem('theme') || 'light-green');
 
     useEffect(() => {
-        setPack(testData);
-        // api('getAll').then((res) => {
-        //     setPack(res);
-        // }).catch(console.error);
+        api('getAll').then((res) => {
+            setPack(res);
+        }).catch(console.error);
     }, []);
 
     if (!packs.length) {
         return <h1>Loading...</h1>;
     }
 
-    return <div>
+    return <div style={{position: 'relative'}}>
         <Tabs
             names={packs.map((pack) => pack.name)}
         />
@@ -118,6 +38,7 @@ function App () {
             }}>Setting</p>
             <PanelBlock title="Size">
                 <input type="range"
+                    style={{width: '80%'}}
                     value={size}
                     min={16}
                     max={128}
@@ -129,9 +50,6 @@ function App () {
                     }}
                 />
             </PanelBlock>
-        </article>
-
-        {/* <section>
             <AddStickerPack
                 onAdd={(name) => {
                     setPack((oldPacks) => oldPacks.concat({
@@ -142,40 +60,13 @@ function App () {
                 onDelete={(name) => {
                 }}
             />
-            <ThemeSelector onTheme={(theme) => {}} />
-        </section> */}
+            <ThemeSelector
+                onTheme={(theme) => {}}
+            />
+        </article>
     </div>;
 }
 
-function PanelBlock ({title, children}) {
-    return <div className="panel-block" style={{
-        display: 'flex',
-    }}>
-        {title}
-        {children}
-    </div>;
-}
 
-function AddStickerPack ({
-    onAdd,
-    onDelete,
-}) {
-    const [name, setName] = useState('');
-    return <div>
-        <span>添加新表情包名字</span>
-        <input type="text"
-            value={name}
-            onChange={(ev) => setName(ev.target.value)}
-        />
-        <button onClick={() => {
-            onAdd(name);
-            setName('');
-        }}>添加</button>
-        <button onClick={() => {
-            onDelete(name);
-            setName('');
-        }}>删除</button>
-    </div>;
-}
 
 render(<App />, document.body);

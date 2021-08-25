@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks';
-import { makeThumbnailURL } from '../../utils.mjs';
+import { makeThumbnailURL } from '../utils.mjs';
 
 export const StickerPack = ({
     pack,
@@ -17,9 +17,12 @@ export const StickerPack = ({
     const style = {
         width: size + 'px',
         height: size + 'px',
+        marginRight: '8px',
+        cursor: 'pointer',
+        border: '1px solid #eee',
     };
 
-    return <article className="panel is-primary">
+    return <article id={name} className="panel is-primary">
         <p className="panel-heading" style={{
             cursor: 'pointer',
             padding: '8px',

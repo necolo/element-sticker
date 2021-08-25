@@ -1,19 +1,28 @@
+require('dotenv').config();
 const static = require('node-static');
 const http = require('http');
 const path = require('path');
 const datastore = require('./datastore');
+const { uploadHandler, thumbnailHandler } = require('./matrix-api');
+const staticHandler = new static.Server(path.join(__dirname, '../dist'));
 
-function parseBody(req) {
+
+function parseBody (req) {
   return new Promise((resolve, reject) => {
     let data = '';
     req.on('data', (chunk) => data += chunk);
     req.on('error', reject);
     req.on('end', () => resolve(JSON.parse(data)));
   });
-}
-const staticHandler = new static.Server(path.join(__dirname, 'frontend'));
+};
 
 http.createServer(async (req, res) => {
+  if (req.url === '/api/upload') {
+    return uploadHandler(req, res);
+  }
+  if (req.url.startsWith('/mxc')) {
+    return thumbnailHandler(req, res);
+  }
   if (!req.url.startsWith('/api')) {
     return staticHandler.serve(req, res);
   }
@@ -21,11 +30,13 @@ http.createServer(async (req, res) => {
     res.writeHead(400);
     return res.end(`bad method ${req.method}`);
   }
-  if (req.url === '/api/upload') {
-    return res.end(JSON.stringify({ url: 'mxc://maunium.net/VAxTbCeSnnntDqPAennfRhsr' }));
+  try {
+    const { action, data } = await parseBody(req);
+    const result = await datastore[action in datastore ? action : 'getAll'](data);
+    res.end(JSON.stringify(result));
+  } catch (err) {
+    res.writeHead('500');
+    res.end('error occurred');
+    console.error(err);
   }
-  const { action, data } = await parseBody(req);
-  const result = await datastore[action in datastore ? action : 'getAll'](data);
-  res.end(JSON.stringify(result));
-
 }).listen(8089);
