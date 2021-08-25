@@ -34,9 +34,9 @@ function swapArray(arr, a, b) {
 }
 
 
-function findPack(packs, name) {
+function findItem(packs, name, nameField = 'name') {
   for (let i = 0; i < packs.length; i++) {
-    if (packs[i].name === name) {
+    if (packs[i][nameField] === name) {
       return i;
     }
   }
@@ -54,10 +54,23 @@ exports.putAll = async (data) => {
 
 exports.putPack = async ({ name, data }) => {
   const packs = await read();
-  const idx = findPack(packs, name);
+  const idx = findItem(packs, name);
   if (idx !== -1) {
     packs[idx] = data;
     await write(packs);
+  }
+  return packs;
+};
+
+exports.putSticker = async ({ packName, stickerName, data }) => {
+  const packs = await read();
+  const idx = findItem(packs, packName);
+  if (idx !== -1) {
+    const i = findItem(packs[idx].stickers, stickerName, 'body');
+    if (i !== -1) {
+      packs[idx].stickers[i] = data;
+      await write(packs);
+    }
   }
   return packs;
 };
@@ -71,7 +84,7 @@ exports.swapPack = async ({ a, b }) => {
 
 exports.swapSticker = async ({ name, a, b }) => {
   const data = await read();
-  const idx = findPack(data, name);
+  const idx = findItem(data, name);
   if (idx !== -1) {
     swapArray(data[idx].stickers, a, b);
     await write(data);
@@ -88,7 +101,7 @@ exports.createPack = async ({name}) => {
 
 exports.addSticker = async ({ name, sticker }) => {
   const data = await read();
-  const idx = findPack(data, name);
+  const idx = findItem(data, name);
   if (idx !== -1) {
     data[idx].stickers.push(sticker);
     await write(data);
@@ -98,7 +111,7 @@ exports.addSticker = async ({ name, sticker }) => {
 
 exports.deletePack = async ({ name }) => {
   const data = await read();
-  const idx = findPack(data, name);
+  const idx = findItem(data, name);
   if (idx !== -1) {
     data.splice(idx, 1);
     await write(data);
@@ -108,7 +121,7 @@ exports.deletePack = async ({ name }) => {
 
 exports.deleteSticker = async ({ name, index }) => {
   const data = await read();
-  const idx = findPack(data, name);
+  const idx = findItem(data, name);
   if (idx !== -1) {
     data[idx].stickers.splice(index, 1);
     await write(data);
