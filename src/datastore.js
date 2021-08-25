@@ -1,10 +1,21 @@
 const path = require('path');
-const fs = require('fs').fsPromise;
+const fs = require('fs').promises;
 
 const filename = path.join(__dirname, '../data.json');
 
+async function exists(filename) {
+  try {
+    await fs.access(filename);
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      return false;
+    }
+  }
+  return true;
+}
+
 async function read () {
-  if (await fs.exists(filename)) {
+  if (await exists(filename)) {
     return JSON.parse((await fs.readFile(filename)).toString());
   }
   return write([]);
