@@ -4,7 +4,7 @@ const http = require('http');
 const path = require('path');
 const datastore = require('./datastore');
 const { uploadHandler, thumbnailHandler } = require('./matrix-api');
-const staticHandler = new static.Server(path.join(__dirname, 'frontend'));
+const staticHandler = new static.Server(path.join(__dirname, '../dist'));
 
 
 function parseBody (req) {
@@ -28,7 +28,7 @@ http.createServer(async (req, res) => {
   }
   if (req.method !== 'POST') {
     res.writeHead(400);
-    return res.end(`bad method ${eq.method}`);
+    return res.end(`bad method ${req.method}`);
   }
   try {
     const { action, data } = await parseBody(req);
