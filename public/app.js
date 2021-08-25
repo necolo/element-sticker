@@ -31,19 +31,20 @@ function App () {
             />
         })}
 
-        {uploadStickerOnPack && <UploadSticker
+        {!!uploadStickerOnPack && <UploadSticker
             packName={uploadStickerOnPack}
             onClose={(data) => {
+                setUploadStickerOnPack('');
                 if (data) {
                     setPack(data);
                 }
-                setUploadStickerOnPack('');
             }}
         />}
 
         <article className="panel is-info">
             <p className="panel-heading" style={{
-                padding: '8px',
+                padding: '4px',
+                fontSize: '0.75em',
             }}>Setting</p>
             <PanelBlock title="Size">
                 <input type="range"
@@ -74,6 +75,11 @@ function App () {
             <ThemeSelector
                 onTheme={(theme) => {}}
             />
+            <PanelBlock title="">
+                <button className="button is-small" onClick={() => {
+                    location.reload();
+                }}>Reload</button>
+            </PanelBlock>
         </article>
     </div>;
 }

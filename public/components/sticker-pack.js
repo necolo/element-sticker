@@ -18,6 +18,7 @@ export const StickerPack = ({
         width: size + 'px',
         height: size + 'px',
         marginRight: '8px',
+        marginBottom: '8px',
         cursor: 'pointer',
         border: '1px solid #eee',
     };
@@ -25,7 +26,8 @@ export const StickerPack = ({
     return <article id={name} className="panel is-primary">
         <p className="panel-heading" style={{
             cursor: 'pointer',
-            padding: '8px',
+            padding: '4px',
+            fontSize: '0.75em',
         }} onClick={handleFold}>{name}</p>
 
         {!isFold &&

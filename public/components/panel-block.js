@@ -16,14 +16,15 @@ export function AddStickerPack ({
     onDelete,
 }) {
     const [name, setName] = useState('');
-    return <PanelBlock title="管理表情包">
+    return <PanelBlock title="">
         <input type="text"
+            placeholder="管理表情包"
             className="input is-small"
             value={name}
             onChange={(ev) => setName(ev.target.value)}
             style={{width: '120px'}}
         />
-        <Space dist={8} />
+        <br />
         <button className="button is-small is-primary"
             onClick={() => {
                 onAdd(name);

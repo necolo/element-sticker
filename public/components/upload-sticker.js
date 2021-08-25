@@ -39,6 +39,7 @@ export function UploadSticker ({
         <div className="modal-background"></div>
         <div className="modal-content" style={{
             width: '95%',
+            maxHeight: '98%',
         }}>
             <Notification status="danger" text={error} />
 
@@ -100,7 +101,7 @@ export function UploadSticker ({
             </>}
 
         </div>;
-        <button className="modal-close is-large" aria-label="close" onClick={onClose}></button>
+        <button className="modal-close is-large" aria-label="close" onClick={() => onClose()}></button>
     </div>;
 }
 
