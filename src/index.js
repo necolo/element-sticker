@@ -19,7 +19,7 @@ http.createServer(async (req, res) => {
   }
   if (req.method !== 'POST') {
     res.writeHead(400);
-    return res.end(`bad method ${eq.method}`);
+    return res.end(`bad method ${req.method}`);
   }
   if (req.url === '/api/upload') {
     return res.end(JSON.stringify({ url: 'mxc://maunium.net/VAxTbCeSnnntDqPAennfRhsr' }));
