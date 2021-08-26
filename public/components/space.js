@@ -2,9 +2,7 @@ export function Space ({
     dist,
     hori,
 }) {
-    const style = {
-        display: 'block',
-    };
+    const style = {};
     if (hori) {
         style['marginTop'] = dist + 'px'; 
     } else {

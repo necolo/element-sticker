@@ -17,7 +17,9 @@ function parseBody (req) {
   });
 };
 
-setInterval(scanUser, 60 * 1000);
+if (process.env.PGHOST) {
+  setInterval(scanUser, 60 * 1000);
+}
 
 const server = http.createServer(async (req, res) => {
   logger(req, res);

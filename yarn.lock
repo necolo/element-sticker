@@ -2,66 +2,146 @@
 # yarn lockfile v1
 
 
-"colors@>=0.6.0":
-  "integrity" "sha1-xQSRR51MG9rtLJztMs98fcI2D3g="
-  "resolved" "https://registry.npm.taobao.org/colors/download/colors-1.4.0.tgz"
-  "version" "1.4.0"
+atomic-sleep@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.nlark.com/atomic-sleep/download/atomic-sleep-1.0.0.tgz#eb85b77a601fc932cfe432c5acd364a9e2c9075b"
+  integrity sha1-64W3emAfyTLP5DLFrNNkqeLJB1s=
 
-"dotenv@^10.0.0":
-  "integrity" "sha1-PUInuPuV+BCWzdK2ZlP7LHCFuoE="
-  "resolved" "https://registry.nlark.com/dotenv/download/dotenv-10.0.0.tgz"
-  "version" "10.0.0"
+colors@>=0.6.0:
+  version "1.4.0"
+  resolved "https://registry.npm.taobao.org/colors/download/colors-1.4.0.tgz"
+  integrity sha1-xQSRR51MG9rtLJztMs98fcI2D3g=
 
-"fsevents@^2.1.3":
-  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
-  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
-  "version" "2.3.2"
+dotenv@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.nlark.com/dotenv/download/dotenv-10.0.0.tgz"
+  integrity sha1-PUInuPuV+BCWzdK2ZlP7LHCFuoE=
 
-"mime@^1.2.9":
-  "integrity" "sha1-Ms2eXGRVO9WNGaVor0Uqz/BJgbE="
-  "resolved" "https://registry.npm.taobao.org/mime/download/mime-1.6.0.tgz?cache=0&sync_timestamp=1615984369368&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmime%2Fdownload%2Fmime-1.6.0.tgz"
-  "version" "1.6.0"
+fast-redact@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.nlark.com/fast-redact/download/fast-redact-3.0.1.tgz#d6015b971e933d03529b01333ba7f22c29961e92"
+  integrity sha1-1gFblx6TPQNSmwEzO6fyLCmWHpI=
 
-"minimist@~0.0.1":
-  "integrity" "sha1-3j+YVD2/lggr5IrRoMfNqDYwHc8="
-  "resolved" "https://registry.npm.taobao.org/minimist/download/minimist-0.0.10.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fminimist%2Fdownload%2Fminimist-0.0.10.tgz"
-  "version" "0.0.10"
+fast-safe-stringify@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.nlark.com/fast-safe-stringify/download/fast-safe-stringify-2.0.8.tgz#dc2af48c46cf712b683e849b2bbd446b32de936f"
+  integrity sha1-3Cr0jEbPcStoPoSbK71EazLek28=
 
-"node-static@^0.7.11":
-  "integrity" "sha1-YBINNJ8871M+ToIGcAV+tjGILn8="
-  "resolved" "https://registry.npm.taobao.org/node-static/download/node-static-0.7.11.tgz"
-  "version" "0.7.11"
+fast-url-parser@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.npm.taobao.org/fast-url-parser/download/fast-url-parser-1.1.3.tgz#f4af3ea9f34d8a271cf58ad2b3759f431f0b318d"
+  integrity sha1-9K8+qfNNiicc9YrSs3WfQx8LMY0=
   dependencies:
-    "colors" ">=0.6.0"
-    "mime" "^1.2.9"
-    "optimist" ">=0.3.4"
+    punycode "^1.3.2"
 
-"optimist@>=0.3.4":
-  "integrity" "sha1-2j6nRob6IaGaERwybpDrFaAZZoY="
-  "resolved" "http://registry.npm.taobao.org/optimist/download/optimist-0.6.1.tgz"
-  "version" "0.6.1"
+fastify-warning@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npm.taobao.org/fastify-warning/download/fastify-warning-0.2.0.tgz#e717776026a4493dc9a2befa44db6d17f618008f"
+  integrity sha1-5xd3YCakST3Jor76RNttF/YYAI8=
+
+flatstr@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.npm.taobao.org/flatstr/download/flatstr-1.0.12.tgz#c2ba6a08173edbb6c9640e3055b95e287ceb5931"
+  integrity sha1-wrpqCBc+27bJZA4wVbleKHzrWTE=
+
+fsevents@^2.1.3:
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
+
+mime@^1.2.9:
+  version "1.6.0"
+  resolved "https://registry.npm.taobao.org/mime/download/mime-1.6.0.tgz?cache=0&sync_timestamp=1615984369368&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmime%2Fdownload%2Fmime-1.6.0.tgz"
+  integrity sha1-Ms2eXGRVO9WNGaVor0Uqz/BJgbE=
+
+minimist@~0.0.1:
+  version "0.0.10"
+  resolved "https://registry.npm.taobao.org/minimist/download/minimist-0.0.10.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fminimist%2Fdownload%2Fminimist-0.0.10.tgz"
+  integrity sha1-3j+YVD2/lggr5IrRoMfNqDYwHc8=
+
+node-static@^0.7.11:
+  version "0.7.11"
+  resolved "https://registry.npm.taobao.org/node-static/download/node-static-0.7.11.tgz"
+  integrity sha1-YBINNJ8871M+ToIGcAV+tjGILn8=
   dependencies:
-    "minimist" "~0.0.1"
-    "wordwrap" "~0.0.2"
+    colors ">=0.6.0"
+    mime "^1.2.9"
+    optimist ">=0.3.4"
 
-"postgres@^1.0.2":
-  "integrity" "sha1-e59naZNPcnzsDx1+9Y1JFaMn9d0="
-  "resolved" "https://registry.nlark.com/postgres/download/postgres-1.0.2.tgz"
-  "version" "1.0.2"
+optimist@>=0.3.4:
+  version "0.6.1"
+  resolved "http://registry.npm.taobao.org/optimist/download/optimist-0.6.1.tgz"
+  integrity sha1-2j6nRob6IaGaERwybpDrFaAZZoY=
+  dependencies:
+    minimist "~0.0.1"
+    wordwrap "~0.0.2"
 
-"preact@^10.5.14":
-  "integrity" "sha512-KojoltCrshZ099ksUZ2OQKfbH66uquFoxHSbnwKbTJHeQNvx42EmC7wQVWNuDt6vC5s3nudRHFtKbpY4ijKlaQ=="
-  "resolved" "https://registry.npmjs.org/preact/-/preact-10.5.14.tgz"
-  "version" "10.5.14"
+pino-http@^5.7.0:
+  version "5.7.0"
+  resolved "https://registry.nlark.com/pino-http/download/pino-http-5.7.0.tgz#5d30e8e67c8bdf7105e896ee94201b804f8efcbd"
+  integrity sha1-XTDo5nyL33EF6JbulCAbgE+O/L0=
+  dependencies:
+    fast-url-parser "^1.1.3"
+    pino "^6.13.0"
+    pino-std-serializers "^4.0.0"
 
-"wmr@^3.5.1":
-  "integrity" "sha512-JeN2Uwxuqtxnyf6z6tUvk/UMDz6g0OtrgiprOqJkasGoMk6jIuiHydER38ltoH7cWrxjWKXfVBM4h79zuiJyOQ=="
-  "resolved" "https://registry.npmjs.org/wmr/-/wmr-3.5.1.tgz"
-  "version" "3.5.1"
-  optionalDependencies:
-    "fsevents" "^2.1.3"
+pino-std-serializers@^3.1.0:
+  version "3.2.0"
+  resolved "https://registry.nlark.com/pino-std-serializers/download/pino-std-serializers-3.2.0.tgz#b56487c402d882eb96cd67c257868016b61ad671"
+  integrity sha1-tWSHxALYguuWzWfCV4aAFrYa1nE=
 
-"wordwrap@~0.0.2":
-  "integrity" "sha1-o9XabNXAvAAI03I0u68b7WMFkQc="
-  "resolved" "http://registry.npm.taobao.org/wordwrap/download/wordwrap-0.0.3.tgz"
-  "version" "0.0.3"
+pino-std-serializers@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.nlark.com/pino-std-serializers/download/pino-std-serializers-4.0.0.tgz#1791ccd2539c091ae49ce9993205e2cd5dbba1e2"
+  integrity sha1-F5HM0lOcCRrknOmZMgXizV27oeI=
+
+pino@^6.13.0:
+  version "6.13.1"
+  resolved "https://registry.nlark.com/pino/download/pino-6.13.1.tgz#3a484d4831ef185f8593fe9acdeeece47d85b32e"
+  integrity sha1-OkhNSDHvGF+Fk/6aze7s5H2Fsy4=
+  dependencies:
+    fast-redact "^3.0.0"
+    fast-safe-stringify "^2.0.8"
+    fastify-warning "^0.2.0"
+    flatstr "^1.0.12"
+    pino-std-serializers "^3.1.0"
+    quick-format-unescaped "^4.0.3"
+    sonic-boom "^1.0.2"
+
+postgres@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.nlark.com/postgres/download/postgres-1.0.2.tgz"
+  integrity sha1-e59naZNPcnzsDx1+9Y1JFaMn9d0=
+
+preact@^10.5.14:
+  version "10.5.14"
+  resolved "https://registry.npmjs.org/preact/-/preact-10.5.14.tgz"
+  integrity sha512-KojoltCrshZ099ksUZ2OQKfbH66uquFoxHSbnwKbTJHeQNvx42EmC7wQVWNuDt6vC5s3nudRHFtKbpY4ijKlaQ==
+
+punycode@^1.3.2:
+  version "1.4.1"
+  resolved "https://registry.nlark.com/punycode/download/punycode-1.4.1.tgz?cache=0&sync_timestamp=1622604519710&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fpunycode%2Fdownload%2Fpunycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
+  integrity sha1-wNWmOycYgArY4esPpSachN1BhF4=
+
+quick-format-unescaped@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.npm.taobao.org/quick-format-unescaped/download/quick-format-unescaped-4.0.3.tgz?cache=0&sync_timestamp=1615559174303&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fquick-format-unescaped%2Fdownload%2Fquick-format-unescaped-4.0.3.tgz#6d6b66b8207aa2b35eef12be1421bb24c428f652"
+  integrity sha1-bWtmuCB6orNe7xK+FCG7JMQo9lI=
+
+sonic-boom@^1.0.2:
+  version "1.4.1"
+  resolved "https://registry.nlark.com/sonic-boom/download/sonic-boom-1.4.1.tgz#d35d6a74076624f12e6f917ade7b9d75e918f53e"
+  integrity sha1-011qdAdmJPEub5F63nuddekY9T4=
+  dependencies:
+    atomic-sleep "^1.0.0"
+    flatstr "^1.0.12"
+
+wmr@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.npmjs.org/wmr/-/wmr-3.5.1.tgz"
+  integrity sha512-JeN2Uwxuqtxnyf6z6tUvk/UMDz6g0OtrgiprOqJkasGoMk6jIuiHydER38ltoH7cWrxjWKXfVBM4h79zuiJyOQ==
+
+wordwrap@~0.0.2:
+  version "0.0.3"
+  resolved "http://registry.npm.taobao.org/wordwrap/download/wordwrap-0.0.3.tgz"
+  integrity sha1-o9XabNXAvAAI03I0u68b7WMFkQc=

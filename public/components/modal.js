@@ -55,7 +55,7 @@ export function StickerModal ({
             if (!url) { throw new Error('Cant get url from upload response'); }
             if (isNaN(width)) { throw new Error('Invalid width or height'); }
             if (!name) { throw new Error('Empty name'); }
-            const height = Math.round(width / ratio);
+            const height = Math.floor(width / ratio);
             const stickerData = buildSticker(name, url, width, height);
             const res = await api('addSticker', {
                 name: packName,
@@ -73,7 +73,7 @@ export function StickerModal ({
         try {
             if (isNaN(width)) { throw new Error('Invalid width or height'); }
             if (!name) { throw new Error('Empty name'); }
-            const height = Math.round(width / ratio);
+            const height = Math.floor(width / ratio);
             const stickerData = buildSticker(name, sticker?.url, width, height);
             const res = await api('updateSticker', {
                 name: packName,
@@ -103,14 +103,14 @@ export function StickerModal ({
     };
 
     const renderSizeInput = () => {
-        return <div className="field is-horizontal">
+        return <div className="field">
             <span>宽{width}</span>
             <Space dist={8} />
-            <span>高{Math.round(width / ratio)}</span>
+            <span>高{Math.floor(width / ratio)}</span>
             <Space dist={8} />
             <p className="control">
                 <input type="range"
-                    style={{width: '128px'}}
+                    style={{width: '256px'}}
                     value={width}
                     onInput={(ev) => setWidth(+ev.target.value)}
                     step={4}
@@ -139,7 +139,7 @@ export function StickerModal ({
     }
 
     let body = <></>;
-    const height = Math.round(width / ratio);
+    const height = Math.floor(width / ratio);
     if (sticker) {
         // modify the sticker
         const isModified = (
