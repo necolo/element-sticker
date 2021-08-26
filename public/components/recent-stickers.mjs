@@ -17,17 +17,16 @@ export function updatePackIndex (packs) {
 
 function getStickersByName(arr) {
     const stickers = [];
-    const invalidItems = [];
+    const newArr = [];
     for (const item of arr) {
         const { packName, stickerName } = item;
         const sticker = packName in packIndex ? packIndex[packName][stickerName] : undefined;
         if (sticker) {
             stickers.push(sticker);
-        } else {
-            invalidItems.push(item);
+            newArr.push(item);
         }
     }
-    return { stickers, invalidItems };
+    return { stickers, newArr };
 }
 
 export function RecentStickerStore () {
@@ -73,7 +72,14 @@ export function RecentStickerStore () {
     };
 
     return {
-        recentStickers: getStickersByName(stickers).stickers,
+        recentStickers: (() => {
+            const data = getStickersByName(stickers);
+            if (data.newArr.length !== stickers.length) {
+                setStickers(data.newArr);
+                save(data.newArr);
+            }
+            return data.stickers;
+        })(),
         addRecentSticker,
         updateRecentSticker,
     };

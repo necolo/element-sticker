@@ -10,6 +10,7 @@ export function Tabs ({
         top: '0',
         backgroundColor: 'white',
         fontSize: '.75rem',
+        marginBottom: '1rem',
     }}>
         <ul>
             {names.map((name) => {
