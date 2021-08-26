@@ -19,3 +19,20 @@ export async function upload(data) {
     });
     return res.json();
 }
+
+export function buildSticker(name, url, w, h) {
+    return {
+        id: url.match(/\/([^\/]+)$/)[1],
+        body: name,
+        url,
+        info: {
+            w,
+            h,
+            thumbnail_url: url,
+            thumbnail_info: {
+                w,
+                h
+            },
+        },
+    };
+}

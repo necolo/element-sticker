@@ -133,3 +133,12 @@ exports.deleteSticker = async ({ name, index }) => {
   return data;
 };
 
+exports.updateSticker = async ({name, index, sticker}) => {
+  const data = await read();
+  const idx = findPack(data, name);
+  if (idx !== -1) {
+    data[idx].stickers[index] = sticker;
+    await write(data);
+  }
+  return data;
+}
