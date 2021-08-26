@@ -39,7 +39,7 @@ function App () {
         })}
 
         <StickerModal onUpdate={(data) => updatePack(data)} />
-        <Settings />
+        <Settings onUpdate={updatePack} />
     </div>;
 
     return <ComposedProvider stores={[
