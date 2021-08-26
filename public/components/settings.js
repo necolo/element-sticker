@@ -1,4 +1,5 @@
 import { useState } from 'preact/hooks';
+import { api } from '../utils.mjs';
 import { useStore } from './store';
 import { Space } from './space';
 
@@ -17,7 +18,9 @@ export function SettingStore() {
     }
 }
 
-export function Settings() {
+export function Settings({
+    onUpdate,
+}) {
     const setting = useStore(SettingStore);
     const [show, setShow] = useState(true);
 
@@ -58,12 +61,12 @@ export function Settings() {
             <AddStickerPack
                 onAdd={(name) => {
                     api('createPack', {name}).then((res) => {
-                        setPack(res);
+                        onUpdate(res);
                     }).catch(console.error);
                 }}
                 onDelete={(name) => {
                     api('deletePack', {name}).then((res) => {
-                        setPack(res);
+                        onUpdate(res);
                     }).catch(console.error);
                 }}
             />
@@ -104,6 +107,7 @@ export function AddStickerPack ({
         />
         <Space dist={4} />
         <button className="button is-small is-primary"
+            disabled={!name}
             onClick={() => {
                 onAdd(name);
                 setName('');
@@ -111,6 +115,7 @@ export function AddStickerPack ({
         >添加</button>
         <Space dist={4} />
         <button
+            disabled={!name}
             className="button is-small is-danger"
             onClick={() => {
                 onDelete(name);
