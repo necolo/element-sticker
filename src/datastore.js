@@ -62,11 +62,11 @@ exports.putPack = async ({ name, data }) => {
   return packs;
 };
 
-exports.putSticker = async ({ packName, stickerName, data }) => {
+exports.putSticker = async ({ name, id, data }) => {
   const packs = await read();
-  const idx = findItem(packs, packName);
+  const idx = findItem(packs, name);
   if (idx !== -1) {
-    const i = findItem(packs[idx].stickers, stickerName, 'body');
+    const i = findItem(packs[idx].stickers, id, 'id');
     if (i !== -1) {
       packs[idx].stickers[i] = data;
       await write(packs);

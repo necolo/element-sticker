@@ -21,8 +21,8 @@ function getStickersByName(arr) {
     const stickers = [];
     const newArr = [];
     for (const item of arr) {
-        const { packName, stickerName } = item;
-        const sticker = packName in packIndex ? packIndex[packName][stickerName] : undefined;
+        const { name, id } = item;
+        const sticker = name in packIndex ? packIndex[name][id] : undefined;
         if (sticker) {
             stickers.push(sticker);
             newArr.push(item);
@@ -51,8 +51,8 @@ export function RecentStickerStore () {
     const addRecentSticker = (_packName, _sticker) => {
         let idx = -1;
         for (let i = 0; i < stickers.length; i++) {
-            const { packName, stickerName } = stickers[i];
-            if (_packName === packName && stickerName === _sticker.body) {
+            const { name, id } = stickers[i];
+            if (_packName === name && id === _sticker.id) {
                 idx = i;
                 break;
             }
@@ -65,8 +65,8 @@ export function RecentStickerStore () {
         setStickers((oldStickers) => {
             const newStickers = oldStickers.slice();
             newStickers.unshift({
-                packName: _packName,
-                stickerName: _sticker.body,
+                name: _packName,
+                id: _sticker.id,
             });
             save(newStickers);
             return newStickers;
