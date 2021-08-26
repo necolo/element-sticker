@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Necolo/element-sticker#readme",
   "dependencies": {
     "node-static": "^0.7.11",
+    "pino-http": "^5.7.0",
     "preact": "^10.5.14"
   },
   "devDependencies": {

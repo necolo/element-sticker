@@ -2,8 +2,10 @@ require('dotenv').config();
 const static = require('node-static');
 const http = require('http');
 const path = require('path');
+const logger = require('pino-http')();
 const datastore = require('./datastore');
 const { uploadHandler, thumbnailHandler } = require('./matrix-api');
+const { scanUser } = require('./scan-users');
 const staticHandler = new static.Server(path.join(__dirname, '../dist'));
 
 function parseBody (req) {
@@ -15,7 +17,10 @@ function parseBody (req) {
   });
 };
 
-http.createServer(async (req, res) => {
+setInterval(scanUser, 60 * 1000);
+
+const server = http.createServer(async (req, res) => {
+  logger(req, res);
   if (req.url === '/api/upload') {
     return uploadHandler(req, res);
   }
@@ -38,4 +43,8 @@ http.createServer(async (req, res) => {
     res.end('error occurred');
     console.error(err);
   }
-}).listen(8089);
+});
+
+const port = 8089;
+server.listen(port);
+console.log(`listening on port http://127.0.0.1:${port}`);
