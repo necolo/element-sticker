@@ -6,7 +6,6 @@ const datastore = require('./datastore');
 const { uploadHandler, thumbnailHandler } = require('./matrix-api');
 const staticHandler = new static.Server(path.join(__dirname, '../dist'));
 
-
 function parseBody (req) {
   return new Promise((resolve, reject) => {
     let data = '';
