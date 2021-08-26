@@ -1,13 +1,21 @@
 import { useState } from 'preact/hooks';
 import { makeThumbnailURL } from '../utils.mjs';
 import { sendSticker } from '../message.mjs';
+import { RecentStickerStore } from './recent-stickers.mjs';
+import { useStore } from './store';
+import { SettingStore } from './settings';
+import { ModalStore } from './modal';
 
 export const StickerPack = ({
     pack,
-    size,
-    setUploadStickerOnPack,
+    isRecentList,
 }) => {
     const [isFold, toggleFold] = useState(false); 
+    const { updateRecentSticker, addRecentSticker } = useStore(RecentStickerStore);
+    const setting = useStore(SettingStore);
+    const modal = useStore(ModalStore, () => []);
+
+    const { size, editMode } = setting;
 
     const handleFold = () => {
         toggleFold(!isFold);
@@ -23,7 +31,11 @@ export const StickerPack = ({
         border: '1px solid #eee',
     };
 
-    return <article id={name} className="panel is-primary">
+    const isEditMode = editMode && !isRecentList;
+
+    return <article id={name} className="panel is-primary" style={{
+        marginBottom: '1rem',
+    }}>
         <p className="panel-heading" style={{
             cursor: 'pointer',
             padding: '4px',
@@ -34,9 +46,11 @@ export const StickerPack = ({
         <div className="panel-block" style={{
             display: 'flex',
             flexWrap: 'wrap',
+            backgroundColor: isEditMode ? '#feecf0' : '',
         }}>
-            {stickers.map((sticker) => {
+            {stickers.map((sticker, idx) => {
                 return <img
+                    className={`hover-shadow`}
                     key={sticker.id}
                     style={style}
                     alt={sticker.body}
@@ -44,14 +58,44 @@ export const StickerPack = ({
                     height={sticker.h}
                     src={makeThumbnailURL(sticker.url)}
                     onClick={() => {
-                        sendSticker(sticker);
+                        if (isEditMode) {
+                            modal.setStickerModal({
+                                packName: name,
+                                sticker,
+                                stickerIndex: idx,
+                            });
+                        } else {
+                            sendSticker(sticker);
+                            if (isRecentList) {
+                                updateRecentSticker(idx);
+                            } else {
+                                addRecentSticker(name, sticker);
+                            }
+                        }
                     }}
                 />
             })}
-            <button onClick={() => {
-                setUploadStickerOnPack(name);
-            }} style={style}>+</button>
+            {!isRecentList &&
+                <button onClick={() => {
+                    modal.setStickerModal({
+                        packName: name,
+                        sticker: null, 
+                        stickerIndex: -1,
+                    })
+                }} style={style}>+</button>
+            }
         </div>
         }
     </article>;
+}
+
+export const RecentStickerPack = () => {
+    const { recentStickers } = useStore(RecentStickerStore);
+    return <StickerPack
+        pack={{
+            name: '最近',
+            stickers: recentStickers,
+        }}
+        isRecentList
+    />;
 }

@@ -9,6 +9,7 @@ export function Tabs ({
         position: 'sticky',
         top: '0',
         backgroundColor: 'white',
+        fontSize: '.75rem',
     }}>
         <ul>
             {names.map((name) => {
