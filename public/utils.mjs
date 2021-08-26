@@ -20,7 +20,7 @@ export async function upload(data) {
     return res.json();
 }
 
-export function buildSticker(name, url, w, h) {
+export function buildSticker(name, url, w, h, mimetype) {
     return {
         id: url.match(/\/([^\/]+)$/)[1],
         body: name,
@@ -28,10 +28,12 @@ export function buildSticker(name, url, w, h) {
         info: {
             w,
             h,
+            mimetype,
             thumbnail_url: url,
             thumbnail_info: {
                 w,
-                h
+                h,
+                mimetype,
             },
         },
     };

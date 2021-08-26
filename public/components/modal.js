@@ -56,7 +56,8 @@ export function StickerModal ({
             if (isNaN(width)) { throw new Error('Invalid width or height'); }
             if (!name) { throw new Error('Empty name'); }
             const height = Math.floor(width / ratio);
-            const stickerData = buildSticker(name, url, width, height);
+            const mimetype = file.type;
+            const stickerData = buildSticker(name, url, width, height, mimetype);
             const res = await api('addSticker', {
                 name: packName,
                 sticker: stickerData,
@@ -74,7 +75,7 @@ export function StickerModal ({
             if (isNaN(width)) { throw new Error('Invalid width or height'); }
             if (!name) { throw new Error('Empty name'); }
             const height = Math.floor(width / ratio);
-            const stickerData = buildSticker(name, sticker?.url, width, height);
+            const stickerData = buildSticker(name, sticker?.url, width, height, sticker?.info.mimetype);
             const res = await api('updateSticker', {
                 name: packName,
                 sticker: stickerData,
