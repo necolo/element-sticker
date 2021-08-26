@@ -4,6 +4,7 @@ import { useState } from 'preact/hooks';
 const STORAGE_KEY = 'recentStickers';
 
 const packIndex = {};
+let initialized = false;
 export function updatePackIndex (packs) {
     for (let i = 0; i < packs.length; i ++) {
         const pack = packs[i];
@@ -13,6 +14,7 @@ export function updatePackIndex (packs) {
             stickerIdx[sticker.body] = sticker;
         }
     }
+    initialized = true;
 }
 
 function getStickersByName(arr) {
@@ -30,10 +32,10 @@ function getStickersByName(arr) {
 }
 
 export function RecentStickerStore () {
-    const [stickers, setStickers] = useState(JSON.parse(localStorage.getItem(STORAGE_KEY)) || []);
+    const [stickers, setStickers] = useState(JSON.parse(window.localStorage[STORAGE_KEY] || '[]'));
 
     const save = (newStickers) => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(newStickers));
+        window.localStorage[STORAGE_KEY] = JSON.stringify(newStickers);
     };
 
     const updateRecentSticker = (idx) => {
@@ -74,7 +76,7 @@ export function RecentStickerStore () {
     return {
         recentStickers: (() => {
             const data = getStickersByName(stickers);
-            if (data.newArr.length !== stickers.length) {
+            if (data.newArr.length !== stickers.length && initialized) {
                 setStickers(data.newArr);
                 save(data.newArr);
             }
