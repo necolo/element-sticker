@@ -2,9 +2,9 @@ import { useState } from 'preact/hooks';
 
 const isMobileSafari = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/)
 const scrollToSection = (evt, id) => {
-	const pack = document.getElementById(`pack-${id}`)
-	pack.scrollIntoView({ block: "start", behavior: "instant" })
 	evt.preventDefault()
+	const pack = document.getElementById(`${id}`)
+	pack.scrollIntoView({ block: "start", behavior: "instant" })
 }
 
 export function Tabs ({

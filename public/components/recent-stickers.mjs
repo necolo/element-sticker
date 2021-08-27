@@ -11,7 +11,7 @@ export function updatePackIndex (packs) {
         const stickerIdx = packIndex[pack.name] = {};
         for (let j = 0; j < pack.stickers.length; j ++) {
             const sticker = pack.stickers[j];
-            stickerIdx[sticker.body] = sticker;
+            stickerIdx[sticker.id] = sticker;
         }
     }
     initialized = true;
@@ -50,6 +50,7 @@ export function RecentStickerStore () {
 
     const addRecentSticker = (_packName, _sticker) => {
         let idx = -1;
+        console.log('addRecentSticker', _packName, _sticker);
         for (let i = 0; i < stickers.length; i++) {
             const { name, id } = stickers[i];
             if (_packName === name && id === _sticker.id) {

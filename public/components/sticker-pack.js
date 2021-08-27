@@ -65,12 +65,12 @@ export const StickerPack = ({
                                 stickerIndex: idx,
                             });
                         } else {
-                            sendSticker(sticker);
                             if (isRecentList) {
                                 updateRecentSticker(idx);
                             } else {
                                 addRecentSticker(name, sticker);
                             }
+                            sendSticker(sticker);
                         }
                     }}
                 />
