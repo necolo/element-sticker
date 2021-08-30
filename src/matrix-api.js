@@ -8,8 +8,8 @@ exports.uploadHandler = function (req, res) {
   const opts = {
     method: 'POST',
     headers: {
+      ...req.headers,
       Authorization: 'Bearer ' + process.env.ACCESS_TOKEN,
-      'Content-Type': req.headers['content-type'],
     },
   };
   const request = httx.request(url, opts, (response) => {
@@ -20,7 +20,8 @@ exports.uploadHandler = function (req, res) {
 };
 
 exports.thumbnailHandler = function (req, res) {
-  req.pipe(httx.request(`${process.env.HOMESERVER_URL}/_matrix/media/r0/thumbnail${req.url.substr(4)}`, (response) => {
+  req.pipe(httx.request(`${process.env.HOMESERVER_URL}/_matrix/media/r0/thumbnail${req.url.substr(4)}`,
+  { headers: req.headers }, (response) => {
     res.writeHead(response.statusCode, response.headers);
     response.pipe(res);
   }));
